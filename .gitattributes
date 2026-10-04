@@ -1,0 +1,5 @@
+# Oculta/venda migrações do Django para não inflar a contagem de Python
+backend/**/migrations/* linguist-vendored
+
+# Força o Linguist do GitHub a detectar o Vue
+*.vue linguist-detectable=true
