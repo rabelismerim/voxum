@@ -629,26 +629,25 @@ onBeforeUnmount(() => {
         :title="meetingName"
         class="mb-4"
       >
-        <div class="flex lg:flex-col gap-2 items-end">
-          <StatusTag
-            v-if="meeting.status"
-            :label="meeting.statusDisplay"
-            :color="meetingStatusColors[meeting.status]"
-          />
-          <SocketTag
-            :socket="socket"
-            @click="open"
-          />
-        </div>
         <template #subtitle>
-          <div class="flex gap-2 items-center mt-1">
-            <StatusTag
-              v-if="meeting.situationDisplay"
-              :label="meeting.situationDisplay"
-            />
+          <div class="flex flex-col gap-2 mt-2">
+            <div class="flex flex-wrap gap-2 items-center">
+              <StatusTag
+                v-if="meeting.status"
+                :label="meeting.statusDisplay"
+                :color="meetingStatusColors[meeting.status]"
+              />
+              <StatusTag
+                v-if="meeting.situationDisplay"
+                :label="meeting.situationDisplay"
+              />
+              <SocketTag
+                :socket="socket"
+                @click="open"
+              />
+            </div>
             <div v-if="meeting.description">
-              <span class="font-bold mr-1">Descrição:</span>
-              {{ meeting.description }}
+              <span class="font-bold mr-1">Descrição:</span>{{ meeting.description }}
             </div>
           </div>
         </template>
@@ -1182,11 +1181,13 @@ onBeforeUnmount(() => {
     <template #top>
       <div class="bg--base border-b-1 border--content/12">
         <div class="flex justify-between items-center gap-x-8 gap-y-2 px-4 py-2 max-w-400 mx-auto">
-          <div class="flex gap-x-8 gap-y-2">
+          <div class="flex min-w-0 flex-1 gap-x-8 gap-y-2 items-center">
             <BackButton />
-            <Breadcrumbs :links="[{ label: 'Assembleias', url: '/assembleias' }, { label: meetingName }]" />
+            <div class="min-w-0 truncate">
+              <Breadcrumbs :links="[{ label: 'Assembleias', url: '/assembleias' }, { label: meetingName }]" />
+            </div>
           </div>
-          <div class="flex gap-3">
+          <div class="ml-auto flex shrink-0 gap-3">
             <Btn
               label="Relatórios"
               outlined
