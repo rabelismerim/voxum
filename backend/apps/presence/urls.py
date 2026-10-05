@@ -1,23 +1,19 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from rest_framework import viewsets, serializers
-from .models import Attendance
+from django.urls import path
 
-
-class AttendanceSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Attendance
-        fields = '__all__'
-
-
-class AttendanceViewSet(viewsets.ModelViewSet):
-    queryset = Attendance.objects.all()
-    serializer_class = AttendanceSerializer
-
-
-router = DefaultRouter()
-router.register(r'', AttendanceViewSet, basename='attendance')
+from apps.presence.views import (
+    PresenceApi,
+    PresenceDepartureApi,
+    PresenceDetailApi,
+    PresenceGuestApi,
+    PresenceRepresentativeManagementApi,
+    PresenceRepresentativeGuestApi
+)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('', PresenceApi.as_view()),
+    path('guest/<uuid:meeting_id>/', PresenceGuestApi.as_view(), name='accredited_guest'),
+    path('management/representatives/', PresenceRepresentativeManagementApi.as_view()),
+    path('representatives/', PresenceRepresentativeGuestApi.as_view()),
+    path('<uuid:id>/', PresenceDetailApi.as_view()),
+    path('register/departure/<uuid:id>/', PresenceDepartureApi.as_view()),
 ]

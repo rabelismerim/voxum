@@ -1,0 +1,2 @@
+targets: ['apps', 'config', 'core','support']
+exclude_dirs: ['venv', 'ignore_dirs']
