@@ -1,16 +1,28 @@
 import axios from 'axios'
+import { requestInterceptor, responseInterceptor, errorHandlerInterceptor } from './interceptors'
 
-export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000',
-  headers: {
-    'Content-Type': 'application/json',
-  },
+const { token, apiHost, apiBaseUrl } = useAmbient()
+
+const headers = {
+  'Accept-Language': 'pt-BR,pt;q=1',
+}
+
+if (token) {
+  headers.Authorization = `Token ${token}`
+}
+
+const api = axios.create({
+  baseURL: `${apiHost}/${apiBaseUrl}`,
+  withCredentials: true,
+  xsrfHeaderName: 'X-CSRFToken',
+  xsrfCookieName: 'csrftoken',
+  withXSRFToken: true,
+  timeout: 100000,
+  headers,
 })
 
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('access_token')
-  if (token && config.headers) {
-    config.headers.Authorization = `Bearer ${token}`
-  }
-  return config
-})
+api.interceptors.request.use(requestInterceptor)
+api.interceptors.response.use(responseInterceptor, errorHandlerInterceptor)
+
+export { api }
+export default api

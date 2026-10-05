@@ -1,20 +1,29 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import LoginView from '../views/LoginView.vue'
-import DashboardView from '../views/DashboardView.vue'
-import MeetingRoomView from '../views/MeetingRoomView.vue'
-import CreditorsView from '../views/CreditorsView.vue'
+import Login from '../views/Login.vue'
+import Dashboard from '../views/Dashboard.vue'
+import Creditors from '../views/Creditors.vue'
+import PollView from '../views/PollView.vue'
 
 const routes = [
   { path: '/', redirect: '/login' },
-  { path: '/login', component: LoginView },
-  { path: '/dashboard', component: DashboardView },
-  { path: '/meetings/:id', component: MeetingRoomView },
-  { path: '/creditors', component: CreditorsView },
+  { path: '/login', name: 'Login', component: Login },
+  { path: '/dashboard', name: 'Dashboard', component: Dashboard },
+  { path: '/creditors', name: 'Creditors', component: Creditors },
+  { path: '/polls/:id', name: 'PollView', component: PollView },
 ]
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes
+})
+
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('access_token')
+  if (to.name !== 'Login' && !token) {
+    next({ name: 'Login' })
+  } else {
+    next()
+  }
 })
 
 export default router

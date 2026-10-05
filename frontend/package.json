@@ -1,19 +1,55 @@
 {
-  "name": "frontend",
+  "name": "voxum-frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "2.0.2",
+  "description": "Voxum web application",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "vite --mode devremote",
+    "dev:guest": "vite --mode devguest",
+    "dev:local": "vite --mode devlocal",
+    "build": "vite build --mode production --emptyOutDir",
+    "build:hml": "vite build --mode homolog --emptyOutDir",
+    "build:prod": "vite build --mode production --emptyOutDir",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "preview": "vite preview",
+    "test": "vitest run --mode devremote"
   },
   "dependencies": {
-    "@quasar/extras": "^2.1.0",
-    "vue": "^3.5.42"
+    "@floating-ui/dom": "^1.6.12",
+    "@formkit/auto-animate": "^0.8.2",
+    "@jrnwn/utils": "^0.0.2",
+    "@quasar/extras": "^1.16.15",
+    "@unocss/reset": "^0.65.1",
+    "@vueuse/core": "^12.0.0",
+    "axios": "^1.7.9",
+    "dayjs": "^1.11.13",
+    "dom-to-image-more": "^3.5.0",
+    "file-saver": "^2.0.5",
+    "jspdf": "^2.5.2",
+    "qr-creator": "^1.0.0",
+    "quasar": "^2.17.5",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^6.0.8",
-    "vite": "^8.3.0"
+    "@iconify-json/carbon": "^1.2.5",
+    "@iconify-json/tabler": "^1.2.13",
+    "@quasar/vite-plugin": "^1.8.1",
+    "@unocss/preset-icons": "^0.65.1",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vitest/ui": "^2.1.8",
+    "eslint": "^9.17.0",
+    "sass": "^1.83.0",
+    "unocss": "^0.65.1",
+    "unplugin-auto-import": "^0.19.0",
+    "unplugin-vue-components": "^0.28.0",
+    "unplugin-vue-macros": "^2.13.6",
+    "vite": "^5.4.21",
+    "vite-plugin-mkcert": "^1.17.6",
+    "vite-plugin-pages": "^0.32.4",
+    "vite-plugin-vue-layouts": "^0.11.0",
+    "vitest": "^2.1.8"
   }
 }

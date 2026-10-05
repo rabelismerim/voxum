@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" width="100%" height="100%">
+  <defs>
+    <!-- Gradiente rosado/magenta exato da logo anterior -->
+    <linearGradient id="voxumTextGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#cc00ff" />
+      <stop offset="100%" stop-color="#ff007f" />
+    </linearGradient>
+
+    <!-- Filtro subtil de brilho opcional para dar destaque -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    .brand-text {
+      font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
+      font-size: 42px;
+      font-weight: bold;
+      fill: url(#voxumTextGradient);
+      letter-spacing: 2px;
+    }
+  </style>
+
+  <text x="10" y="44" class="brand-text" filter="url(#glow)">VOXUM</text>
+</svg>

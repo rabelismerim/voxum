@@ -1,22 +1,49 @@
 import { createApp } from 'vue'
-import { Quasar, Notify } from 'quasar'
-import router from './router'
-import App from './App.vue'
+import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
+import { Dialog, Quasar, Ripple } from 'quasar'
+import quasarLang from 'quasar/lang/pt-BR'
+import quasarIconSet from 'quasar/icon-set/material-icons-outlined'
 
-// Importe a fonte do Material Icons
-import '@quasar/extras/material-icons/material-icons.css'
+import router from '@/router'
+import App from '@/App.vue'
 
-// Importe o CSS principal do Quasar
+// Diretivas personalizadas
+import vResize from '@/directives/vResize'
+
+// Estilos
+import '@quasar/extras/material-icons-outlined/material-icons-outlined.css'
 import 'quasar/src/css/index.sass'
-
-// Importe o CSS da aplicação (Tailwind) por último
-import './style.css'
+import '@/assets/style.css'
+import '@unocss/reset/tailwind.css'
+import 'uno.css'
 
 const app = createApp(App)
 
 app.use(Quasar, {
-  plugins: { Notify }
+  plugins: {
+    Dialog,
+  },
+  lang: quasarLang,
+  iconSet: quasarIconSet,
+  config: {
+    brand: {
+      primary: '#007db3',
+      secondary: '#111111',
+      accent: '#111111',
+      dark: '#111111',
+      positive: '#007db3',
+      negative: '#d9291c',
+      info: '#31CCEC',
+      warning: '#F2C037',
+    },
+  },
 })
 
 app.use(router)
+app.use(autoAnimatePlugin)
+
+// Registo de diretivas
+app.directive('ripple', Ripple)
+app.directive('resize', vResize)
+
 app.mount('#app')
