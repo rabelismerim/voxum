@@ -75,9 +75,10 @@ export default function useService(endpoint, options = {}) {
     try {
       const useUrl = url(args) + controlPagination(pagination.value, typeOf(extraPagination) === 'Object' ? extraPagination : extraPagination(pagination.value, args))
       const result = await useApi.get(useUrl)
-      setTotal(result?.data?.count ?? 0)
-      resultItems = result?.data?.results ?? []
-      tryItems = result?.data?.results?.map(mapItem)
+      const data = result?.data ?? result
+      setTotal(data?.count ?? 0)
+      resultItems = data?.results ?? []
+      tryItems = data?.results?.map(mapItem)
     } catch (error) {
       print(errorMessage + ': ', error)
     }
